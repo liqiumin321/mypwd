@@ -56,7 +56,7 @@
 					</li>
 				</ul>
 
-				<span class="mui-icon mui-icon-plus" id="add"></span>
+				<img src="images/plus.png" width="50px" id="addButton" style="position:absolute;bottom:5%;right: 5%;"/>
 			</div>
 		</div>
 		<script src="js/mui.min.js"></script>
@@ -73,13 +73,13 @@
 				}, false);
 				$.plusReady(function() {
 					var settingPage = $.preload({
-						"id": 'addPassword',
-						"url": 'addPassword.html'
+						"id": 'setting',
+						"url": 'setting.html'
 					});
 					
 					var addPage=$.preload({
-						"id": 'setting',
-						"url": 'setting.html'
+						"id": 'addPassword',
+						"url": 'addPassword.html'
 					});
 					//设置
 					//var settingButton = doc.getElementById('setting');
@@ -98,7 +98,7 @@
 //							}
 //						});
 //					});
-					var addButton = doc.getElementById('add');
+					var addButton = doc.getElementById('addButton');
 					addButton.addEventListener('tap',function(event) {
 						$.openWindow({
 							id: 'addPassword',
