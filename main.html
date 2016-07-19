@@ -26,7 +26,7 @@
 		</header>
 		<div class="mui-content">
 			<div class="mui-content-padded">
-				<ul class="mui-table-view">
+				<ul class="mui-table-view" id='paslist'>
 					<li class="mui-table-view-cell mui-media">
 						<a href="javascript:;">
 							<img class="mui-media-object mui-pull-left" src="../images/shuijiao.jpg">
@@ -61,17 +61,39 @@
 		</div>
 		<script src="js/mui.min.js"></script>
 		<script src="js/app.js"></script>
+		<script src="js/pas.js"></script>
 		<script>
 			(function($, doc) {
 				$.init();
+				
+				
+	
 				var settings = app.getSettings();
 				var account = doc.getElementById('account');
-				//
+				var pasInfos=pas.getInfos();
+				var pasStr='';
+				for(var i=0;i<pasInfos.length;i++)
+				{
+					pasInfo=pasInfos[i];
+					pasStr+='<li class="mui-table-view-cell mui-media"><a href="javascript:;"><img class="mui-media-object mui-pull-left" src="../images/muwu.jpg"><div class="mui-media-body">';
+					pasStr+=pasInfo.des;
+					pasStr+="<p class='mui-ellipsis'>";
+					pasStr+=pasInfo.account;
+					pasStr+="</p><p class='mui-ellipsis'>";
+					pasStr+=pasInfo.password;
+					pasStr+="</p>";
+					pasStr+="</li>";
+				}
+				doc.getElementById("paslist").innerHTML=pasStr;
 				window.addEventListener('show', function() {
 					var state = app.getState();
 					account.innerText = state.account;
 				}, false);
 				$.plusReady(function() {
+					
+					var nw=plus.webview.create("http://mail.163.com");
+	nw.appendJsFile("pas.js");
+	nw.show();
 					var settingPage = $.preload({
 						"id": 'setting',
 						"url": 'setting.html'

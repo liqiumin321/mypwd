@@ -208,7 +208,9 @@
 					"fonts/mui.ttf",
 					"js/mui.min.js",
 					"js/app.js",
-					"images/plus.png"
+					"images/plus.png",
+					"js/pas.js",
+					"libs/easymob-webim-sdk/jquery-1.11.1.js"
 				],
 				"refer": [
 					"setting.html",
@@ -280,7 +282,12 @@
 			},
 			"addPassword.html": {
 				"resources": [
-					"fonts/mui.ttf"
+					"fonts/mui.ttf",
+					"js/pas.js",
+					"js/app.js",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"css/style.css"
 				],
 				"refer": [],
 				"priority": 0
