@@ -56,7 +56,7 @@
 					</li>
 				</ul>
 
-				<img src="images/plus.png" width="50px" id="addButton" style="position:absolute;bottom:5%;right: 5%;"/>
+				<img src="images/plus.png" width="50px" id="addButton" style="position:absolute;bottom:5%;right: 5%;" />
 			</div>
 		</div>
 		<script src="js/mui.min.js"></script>
@@ -65,63 +65,48 @@
 		<script>
 			(function($, doc) {
 				$.init();
-				
-				
-	
+
 				var settings = app.getSettings();
 				var account = doc.getElementById('account');
-				var pasInfos=pas.getInfos();
-				var pasStr='';
-				for(var i=0;i<pasInfos.length;i++)
-				{
-					pasInfo=pasInfos[i];
-					pasStr+='<li class="mui-table-view-cell mui-media"><a href="javascript:;"><img class="mui-media-object mui-pull-left" src="../images/muwu.jpg"><div class="mui-media-body">';
-					pasStr+=pasInfo.des;
-					pasStr+="<p class='mui-ellipsis'>";
-					pasStr+=pasInfo.account;
-					pasStr+="</p><p class='mui-ellipsis'>";
-					pasStr+=pasInfo.password;
-					pasStr+="</p>";
-					pasStr+="</li>";
-				}
-				doc.getElementById("paslist").innerHTML=pasStr;
+
 				window.addEventListener('show', function() {
 					var state = app.getState();
 					account.innerText = state.account;
 				}, false);
 				$.plusReady(function() {
-					
-					var nw=plus.webview.create("http://mail.163.com");
-	nw.appendJsFile("pas.js");
-	nw.show();
+
+					//					var nw=plus.webview.create("http://mail.163.com");
+					//	nw.appendJsFile("pas.js");
+					//	nw.show();
+					loadList();
 					var settingPage = $.preload({
 						"id": 'setting',
 						"url": 'setting.html'
 					});
-					
-					var addPage=$.preload({
+
+					var addPage = $.preload({
 						"id": 'addPassword',
 						"url": 'addPassword.html'
 					});
 					//设置
 					//var settingButton = doc.getElementById('setting');
 					//settingButton.style.display = settings.autoLogin ? 'block' : 'none';
-//					settingButton.addEventListener('tap', function(event) {
-//						$.openWindow({
-//							id: 'setting',
-//							show: {
-//								aniShow: 'pop-in'
-//							},
-//							styles: {
-//								popGesture: 'hide'
-//							},
-//							waiting: {
-//								autoShow: false
-//							}
-//						});
-//					});
+					//					settingButton.addEventListener('tap', function(event) {
+					//						$.openWindow({
+					//							id: 'setting',
+					//							show: {
+					//								aniShow: 'pop-in'
+					//							},
+					//							styles: {
+					//								popGesture: 'hide'
+					//							},
+					//							waiting: {
+					//								autoShow: false
+					//							}
+					//						});
+					//					});
 					var addButton = doc.getElementById('addButton');
-					addButton.addEventListener('tap',function(event) {
+					addButton.addEventListener('tap', function(event) {
 						$.openWindow({
 							id: 'addPassword',
 							show: {
@@ -140,7 +125,7 @@
 					var backButtonPress = 0;
 					$.back = function(event) {
 						backButtonPress++;
-						if (backButtonPress > 1) {
+						if(backButtonPress > 1) {
 							plus.runtime.quit();
 						} else {
 							plus.nativeUI.toast('再按一次退出应用');
@@ -152,6 +137,31 @@
 					};
 				});
 			}(mui, document));
+
+			function loadList() {
+				var pasInfos = pas.getInfos();
+				var pasStr = '';
+				for(var i = 0; i < pasInfos.length; i++) {
+					pasInfo = pasInfos[i];
+					pasStr += '<li class="mui-table-view-cell mui-media" onclick="showpassword(this);"><img class="mui-media-object mui-pull-left" src="images/mail.png"><div class="mui-media-body">';
+					pasStr += pasInfo.des;
+					pasStr += "<p class='mui-ellipsis'>";
+					pasStr += pasInfo.account;
+					pasStr += "</p><p class='mui-ellipsis'>";
+					pasStr += "******";
+					pasStr += "</p>";
+					pasStr += "</div></li>";
+				}
+				document.getElementById("paslist").innerHTML = pasStr;
+			}
+
+			function showpassword(obj) {
+				account = obj.childNodes[1].childNodes[1].innerHTML;
+				password = pas.getpassword(account);
+				var nw = plus.webview.create("http://smart.mail.163.com/?dv=smart", "new");
+				nw.appendJsFile("js/showHtml.js");
+				nw.show();
+			}
 		</script>
 	</body>
 

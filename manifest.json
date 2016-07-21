@@ -210,7 +210,8 @@
 					"js/app.js",
 					"images/plus.png",
 					"js/pas.js",
-					"libs/easymob-webim-sdk/jquery-1.11.1.js"
+					"libs/easymob-webim-sdk/jquery-1.11.1.js",
+					"images/mail.png"
 				],
 				"refer": [
 					"setting.html",
@@ -289,7 +290,9 @@
 					"css/mui.min.css",
 					"css/style.css"
 				],
-				"refer": [],
+				"refer": [
+					"main.html"
+				],
 				"priority": 0
 			}
 		},
